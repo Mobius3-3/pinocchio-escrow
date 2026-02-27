@@ -25,17 +25,19 @@ pub fn process_make_instruction(
         return Err(ProgramError::NotEnoughAccountKeys);
     };
 
-    let maker_ata_state = pinocchio_token::state::TokenAccount::from_account_view(&maker_ata)?;
-    if maker_ata_state.owner() != maker.address() {
-        return Err(ProgramError::IllegalOwner);
-    }
-    if maker_ata_state.mint() != mint_a.address() {
-        return Err(ProgramError::InvalidAccountData);
+    {
+        let maker_ata_state = pinocchio_token::state::TokenAccount::from_account_view(&maker_ata)?;
+        if maker_ata_state.owner() != maker.address() {
+            return Err(ProgramError::IllegalOwner);
+        }
+        if maker_ata_state.mint() != mint_a.address() {
+            return Err(ProgramError::InvalidAccountData);
+        }
     }
 
     let bump = data[0];
     let seed = [b"escrow".as_ref(), maker.address().as_ref(), &[bump]];
-    let seeds = &seed[..];
+    // let seeds = &seed[..];
 
     let escrow_account_pda = derive_address(&seed, None, &crate::ID.to_bytes());
     assert_eq!(escrow_account_pda, *escrow_account.address().as_array());
