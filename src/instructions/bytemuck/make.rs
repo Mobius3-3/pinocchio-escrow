@@ -4,8 +4,6 @@ use pinocchio::{
 use pinocchio_pubkey::derive_address;
 use pinocchio_system::instructions::CreateAccount;
 use bytemuck::{Pod, Zeroable};
-use pinocchio_log::logger::Logger;
-
 use crate::state::Escrow;
 
 #[repr(C)]
@@ -104,7 +102,7 @@ pub fn process_make_instruction(
     }.invoke()?;
 
     pinocchio_token::instructions::Transfer {
-        from: maker_ata,
+        from: maker_ata, // should be dropped
         to: escrow_ata,
         authority: maker,
         amount: parsed_data.amount_to_give,

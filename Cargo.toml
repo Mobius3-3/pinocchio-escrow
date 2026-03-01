@@ -7,14 +7,17 @@ edition = "2021"
 crate-type = ["cdylib", "lib"]
 
 [dependencies]
-pinocchio = "0.10.2"
+pinocchio = { version = "0.10.0", features = ["copy"] }
 pinocchio-system = "0.5.0"
 pinocchio-token = "0.5.0"
 pinocchio-pubkey = { git = "https://github.com/anza-xyz/pinocchio.git" }
 pinocchio-log = "0.5.1"
 pinocchio-associated-token-account = "0.3.0"
+bytemuck = { version = "1.13.1", features = ["derive"] }
+wincode = { version = "0.4.5", features = ["derive"] }
 
 [dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
 litesvm = "0.9.1"
 litesvm-token = "0.9.1"
 
