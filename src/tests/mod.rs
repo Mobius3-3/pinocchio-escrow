@@ -33,7 +33,7 @@ mod tests {
 
         // Load program SO file
         println!("The path is!! {}", env!("CARGO_MANIFEST_DIR"));
-        let so_path = PathBuf::from("/Users/andrecorreia/Documents/Solana/pinocchio-escrow-2025/escrow/target/sbf-solana-solana/release/escrow.so");
+        let so_path = PathBuf::from("/Users/mobius/Desktop/pinocchio-escrow/target/sbpf-solana-solana/release/escrow.so");
     
         let program_data = std::fs::read(so_path).expect("Failed to read program SO file");
     
@@ -135,5 +135,6 @@ mod tests {
         // Log transaction details
         println!("\n\nMake transaction sucessfull");
         println!("CUs Consumed: {}", tx.compute_units_consumed);
+        println!("Program logs:\n{}", tx.logs.join("\n"));
     }
 }

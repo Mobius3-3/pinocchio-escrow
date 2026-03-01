@@ -6,6 +6,7 @@ use crate::instructions::EscrowInstrctions;
 mod tests;
 mod state;
 mod instructions;
+mod utils;
 
 entrypoint!(process_instruction);
 
